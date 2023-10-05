@@ -6,14 +6,13 @@
 /*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:04:33 by myanez-p          #+#    #+#             */
-/*   Updated: 2023/09/11 17:06:23 by myanez-p         ###   ########.fr       */
+/*   Updated: 2023/10/05 13:13:58 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "builtins.h"
 
-void	echo(char **str)
+void	ft_echo(char **str)
 {
 	int	i;
 	int	flag;
@@ -40,7 +39,6 @@ void	echo(char **str)
 		printf("\n");
 }
 
-/*
 int	main(void)
 {
 	char	*argv[] = {"echo", "Hello World", NULL};
@@ -48,10 +46,9 @@ int	main(void)
 	char	*argv_justecho[] = {"echo", NULL};
 	char	*argv_test[] = {"echo", "Hello World", "-n", NULL};
 
-	//echo(argv);
-	//echo(argvn);
-	//echo(argv_justecho);
-	echo(argv_test);
+	//ft_echo(argv);
+	//ft_echo(argvn);
+	//ft_echo(argv_justecho);
+	ft_echo(argv_test);
 	return (0);
 }
-*/

@@ -6,44 +6,33 @@
 /*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 13:44:07 by myanez-p          #+#    #+#             */
-/*   Updated: 2023/09/14 18:30:24 by myanez-p         ###   ########.fr       */
+/*   Updated: 2023/10/05 13:11:57 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "builtins.h"
 
-int	g_var;
-
-struct s_env_data
+int	is_numeric(char *str)
 {
-	char	*name;
-	char	*value;
-};
-
-void	env(struct s_env_data *env)
-{
-	int		i;
-	int		n_var;
-	char	*var;
+	int	i;
 
 	i = 0;
-	n_var = 0;
-	while (getenv(NULL) != NULL)
-		n_var++;
-	env = malloc(sizeof(struct s_env_data) * (n_var + 1));
-	while (getenv(NULL) != NULL)
+	while (str[i])
 	{
-		env[i].name = getenv(NULL);
-		env[i].value = getenv(env[i].name);
-		i ++;
+		if (str[i] >= '0' && str[i] <= '9')
+			i ++;
+		else
+			return (0);
 	}
+	return (1);
 }
 
-void	exit(char **str, char **env)
+void	ft_exit(char **str)
 {
 	if (str[1] == NULL) //il y a que exit
 	{
-		exit();
+		printf("exit\n");
+		exit(0); // success
 	}
 	else if (is_numeric(str[1]) == 1) // il y a exit et une valeur numérique
 	{
@@ -54,6 +43,17 @@ void	exit(char **str, char **env)
 	{
 		printf("exit\n");
 		printf("numeric argument required\n");
-		exit(255);
+		exit(255); // interpretation error of the exit status convention
 	}
 }
+
+int	main(void)
+{
+	char	*str[2];
+
+	str[0] = "exit";
+	str[1] = "12";
+	ft_exit(str);
+}
+
+// to print the last exit status 'echo $?'  
