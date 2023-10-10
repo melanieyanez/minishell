@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 17:11:33 by myanez-p          #+#    #+#             */
-/*   Updated: 2023/10/05 15:25:27 by myanez-p         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:55:36 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	ft_env(char ***env_var)
+/* attention à remplacer strdup par ft_strdup */
+
+void	set_env(char ***env_var)
 {
 	extern char	**environ;
 	int			i;
@@ -25,11 +27,22 @@ void	ft_env(char ***env_var)
 	*env_var = malloc(sizeof(char *) * (count + 1));
 	while (environ[i] != NULL)
 	{
-		(*env_var)[i] = environ[i];
-		printf("%s\n", (*env_var)[i]);
+		(*env_var)[i] = strdup(environ[i]);
 		i ++;
 	}
 	(*env_var)[i] = NULL;
+}
+
+void	ft_env(char ***env_var)
+{
+	int	i;
+
+	i = 0;
+	while ((*env_var)[i] != NULL)
+	{
+		printf("%s\n", (*env_var)[i]);
+		i ++;
+	}
 }
 
 /*
@@ -37,10 +50,8 @@ int	main(void)
 {
 	char	**env_var;
 
-	ft_env(env_var);
+	set_env(&env_var);
+	ft_env(&env_var);
 	return (0);
 }
 */
-
-// Attention ici je remplis la variable var en même temps que je la print
-// Donc ne va pas prendre les modifications

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 13:44:07 by myanez-p          #+#    #+#             */
-/*   Updated: 2023/10/05 13:11:57 by myanez-p         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:30:28 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+/* attention remplacer atoi par ft_atoi */
 
 int	is_numeric(char *str)
 {
@@ -29,31 +31,33 @@ int	is_numeric(char *str)
 
 void	ft_exit(char **str)
 {
-	if (str[1] == NULL) //il y a que exit
+	if (str[1] == NULL)
 	{
 		printf("exit\n");
-		exit(0); // success
+		exit(0);
 	}
-	else if (is_numeric(str[1]) == 1) // il y a exit et une valeur numérique
+	else if (is_numeric(str[1]) == 1)
 	{
 		printf("exit\n");
 		exit(atoi(str[1]));
 	}
-	else // il y a exit et une valeur non numérique
+	else
 	{
 		printf("exit\n");
 		printf("numeric argument required\n");
-		exit(255); // interpretation error of the exit status convention
+		exit(255);
 	}
 }
 
+/*
 int	main(void)
 {
 	char	*str[2];
 
 	str[0] = "exit";
-	str[1] = "12";
+	str[1] = "a";
 	ft_exit(str);
 }
+*/
 
 // to print the last exit status 'echo $?'  

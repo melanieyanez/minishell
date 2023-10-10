@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:17:53 by myanez-p          #+#    #+#             */
-/*   Updated: 2023/10/05 17:42:10 by myanez-p         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:39:26 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+/* attention à remplacer strncmp strlen et strdup */
 
 int	is_in_env(char **env_var, const char *var)
 {
@@ -30,47 +32,75 @@ int	is_in_env(char **env_var, const char *var)
 	return (0);
 }
 
-void	ft_unset(char ***env_var, char *var)
+int	should_unset(char **var, const char *target)
 {
 	int	i;
-	int	j;
-	int	n;
+
+	i = 0;
+	while (var[i])
+	{
+		if (strncmp(target, var[i], strlen(var[i])) == 0
+			&& target[strlen(var[i])] == '=')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	new_size(char ***env_var, char **var)
+{
+	int	i;
+	int	n_var;
+
+	i = 0;
+	n_var = 0;
+	while ((*env_var)[n_var])
+		n_var ++;
+	while (var[i])
+	{
+		if (is_in_env(*env_var, var[i]) == 1)
+			n_var --;
+		i ++;
+	}
+	return (n_var);
+}
+
+void	ft_unset(char ***env_var, char **var)
+{
+	int		i;
+	int		j;
+	int		n_var;
 	char	**result;
 
-	n = 0;
-	while ((*env_var)[n])
-		n ++;
-	if (is_in_env(*env_var, var) == 0)
+	n_var = new_size(env_var, var);
+	result = malloc(sizeof(char *) * (n_var + 1));
+	if (!result)
 		return ;
-	result = malloc(sizeof(char *) * n);
 	i = 0;
 	j = 0;
 	while ((*env_var)[i])
 	{
-		if (strncmp((*env_var)[i], var, strlen(var)) == 1)
-			result[j] = strdup((*env_var)[i]);
-		//free ((*env_var)[i]);
+		if (should_unset(var, (*env_var)[i]) == 0)
+			result[j++] = strdup((*env_var)[i]);
+		free((*env_var)[i]);
 		i ++;
-		j ++;
 	}
 	result[j] = NULL;
-	//free(*env_var);
+	free(*env_var);
 	*env_var = result;
 }
 
+/*
 int	main(void)
 {
 	char	**env_var;
 	int		i;
+	char	*argv[] = {"PATH", "LOGNAME", NULL};
 
+	set_env(&env_var);
 	ft_env(&env_var);
-	//ft_unset(&env_var, "PATH");
+	ft_unset(&env_var, argv);
 	printf("\n\n\n\n\n\n\n\n");
-	//printf("%d\n", is_in_env(env_var, "PATH"));
-	i = 0;
-	while (env_var[i])
-	{
-		printf("%s\n", env_var[i]);
-		i ++;
-	}
+	ft_env(&env_var);
 }
+*/
