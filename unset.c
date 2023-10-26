@@ -6,13 +6,14 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:17:53 by myanez-p          #+#    #+#             */
-/*   Updated: 2023/10/10 17:39:26 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/10/17 15:26:39 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
 /* attention à remplacer strncmp strlen et strdup */
+/* modifier pour prendre qu'à partir du deuxième token */
 
 int	is_in_env(char **env_var, const char *var)
 {

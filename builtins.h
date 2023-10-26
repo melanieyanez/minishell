@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:00:18 by myanez-p          #+#    #+#             */
-/*   Updated: 2023/10/10 14:50:38 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/10/17 17:46:50 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ void	ft_env(char ***env_var);
 
 void	ft_exit(char **str);
 
+//export.c
+
+void	ft_export(char ***env_var, char **var);
+
 //unset.c
 
 void	ft_unset(char ***env_var, char **var);
+int		should_unset(char **var, const char *target);
 
 #endif
