@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:30:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/10/17 16:49:50 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/10/26 16:01:17 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ int	check_var(char *var) //pr verifier le format de la variable
 		i ++;
 	}
 	return (0);
-	//si commence par un '=' retourne "'=salut': not a valid identifier"
-	//si ne contient pas de '=' ne fait rien
-	//si contient un '=' et rien apres, l'ajoute
 }
+
+//si commence par un '=' retourne "'=salut': not a valid identifier"
+//si ne contient pas de '=' ne fait rien
+//si contient un '=' et rien apres, l'ajoute
 
 void	print_export(char ***env_var)//pr printer si juste export sans arg
 {

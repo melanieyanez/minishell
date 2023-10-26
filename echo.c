@@ -6,7 +6,7 @@
 /*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:04:33 by myanez-p          #+#    #+#             */
-/*   Updated: 2023/10/05 13:13:58 by myanez-p         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:00:41 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_echo(char **str)
 		printf("\n");
 }
 
+/*
 int	main(void)
 {
 	char	*argv[] = {"echo", "Hello World", NULL};
@@ -52,3 +53,4 @@ int	main(void)
 	ft_echo(argv_test);
 	return (0);
 }
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 17:14:29 by myanez-p          #+#    #+#             */
-/*   Updated: 2023/10/17 17:57:51 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/10/26 15:59:29 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 //getcwd copies the absolute path name of the current working directory into buf and returns a pointer to it
 
 //only with a relative or an absolute path
-
-//attention à gérer si on a un chemin entier ou juste un petit bout
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -48,33 +46,33 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 void	ft_cd(char ***env_var, char **str)
 {
-	char	current_wd[4096];
-	char	*target_wd;
+	char	old_wd[4096];
+	char	target_wd[4096];
 	char	**path;
 
 	path = malloc(sizeof(char *) * 4);
-	getcwd(current_wd, sizeof(current_wd));
+	getcwd(old_wd, sizeof(old_wd));
 	if (str[1] == NULL)
 		return ;
-	target_wd = strdup(str[1]);
-	if (chdir(target_wd) != 0)
+	if (chdir(str[1]) != 0)
 	{
 		perror("cd");
 	}
-	else if (getcwd(current_wd, sizeof(current_wd)) != NULL)
+	else if (getcwd(target_wd, sizeof(target_wd)) != NULL)
 	{
 		path[0] = strdup("export");
 		path[1] = ft_strjoin("PWD=", target_wd);
-		path[2] = ft_strjoin("OLDPWD=", current_wd);
+		path[2] = ft_strjoin("OLDPWD=", old_wd);
 		path[3] = NULL;
 		ft_export(env_var, path);
 	}
 }
 
+/*
 int	main(void)
 {
 	char	**env_var;
-	char	*argv[] = {"cd", "minishell"};
+	char	*argv[] = {"cd", "/Users/myanez-p/cursus_42/Rank02"};
 
 	set_env(&env_var);
 	ft_env(&env_var);
@@ -82,3 +80,4 @@ int	main(void)
 	printf("\n\n\n");
 	ft_env(&env_var);
 }
+*/
